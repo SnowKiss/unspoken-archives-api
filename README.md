@@ -1,63 +1,71 @@
-# unspoken-archives-api
+# Unspoken Archives
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+## Présentation du Projet
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+"Unspoken Archives" est une application web conçue pour les amateurs de jeux de rôle (JDR) et les développeurs de jeux. Elle permet la génération automatique de profils de Personnages Non Joueurs (PNJ) avec des détails enrichis, y compris des noms, des backgrounds, des occupations, et plus encore, en utilisant l'intelligence artificielle.
 
-## Running the application in dev mode
+Cette application est idéale pour les maîtres de jeu (MJ) qui ont besoin de créer rapidement des PNJ détaillés pour leurs campagnes de JDR, ou pour les développeurs de jeux cherchant à peupler leurs mondes de jeu avec des personnages uniques.
 
-You can run your application in dev mode that enables live coding using:
+## Technologies Utilisées
+
+- Java 21.0.1
+- Maven 3.9.5
+- Quarkus 3.4
+
+## Lancer l'application en mode développement
+
+Vous pouvez exécuter votre application en mode développement qui permet le live coding avec la commande suivante :
 ```shell script
 ./mvnw compile quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+> **_NOTE :_** Quarkus est maintenant livré avec une interface Dev UI, qui est disponible en mode développement uniquement à l'adresse http://localhost:8080/q/dev/.
 
-## Packaging and running the application
+## Packaging et exécution de l'application
 
-The application can be packaged using:
+L'application peut être empaquetée en utilisant :
 ```shell script
 ./mvnw package
 ```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+Cela produit le fichier `quarkus-run.jar` dans le répertoire `target/quarkus-app/`.
+Notez que ce n’est pas un _über-jar_ car les dépendances sont copiées dans le répertoire `target/quarkus-app/lib/`.
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+L'application est maintenant exécutable en utilisant `java -jar target/quarkus-app/quarkus-run.jar`.
 
-If you want to build an _über-jar_, execute the following command:
+Si vous souhaitez construire un _über-jar_, exécutez la commande suivante :
 ```shell script
 ./mvnw package -Dquarkus.package.type=uber-jar
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+L'application, empaquetée comme un _über-jar_, est maintenant exécutable en utilisant `java -jar target/*-runner.jar`.
 
-## Creating a native executable
+## Créer un exécutable natif
 
-You can create a native executable using: 
+Vous pouvez créer un exécutable natif en utilisant :
 ```shell script
 ./mvnw package -Dnative
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
+Ou, si vous n'avez pas GraalVM installé, vous pouvez exécuter la construction de l'exécutable natif dans un conteneur en utilisant :
 ```shell script
 ./mvnw package -Dnative -Dquarkus.native.container-build=true
 ```
 
-You can then execute your native executable with: `./target/unspoken-archives-api-1.0.0-SNAPSHOT-runner`
+Vous pouvez ensuite exécuter votre exécutable natif avec : `./target/unspoken-archives-api-1.0.0-SNAPSHOT-runner`
 
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+Si vous souhaitez en savoir plus sur la création d'exécutables natifs, veuillez consulter https://quarkus.io/guides/maven-tooling.
 
-## Related Guides
+## Guides Associés
 
-- REST resources for Hibernate ORM with Panache ([guide](https://quarkus.io/guides/rest-data-panache)): Generate Jakarta REST resources for your Hibernate Panache entities and repositories
-- REST Client Reactive ([guide](https://quarkus.io/guides/rest-client-reactive)): Call REST services reactively
-- RESTEasy Reactive ([guide](https://quarkus.io/guides/resteasy-reactive)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
+- Ressources REST pour Hibernate ORM avec Panache ([guide](https://quarkus.io/guides/rest-data-panache)) : Générez des ressources REST Jakarta pour vos entités et dépôts Hibernate Panache
+- Client REST Réactif ([guide](https://quarkus.io/guides/rest-client-reactive)) : Appelez des services REST de manière réactive
+- RESTEasy Réactif ([guide](https://quarkus.io/guides/resteasy-reactive)) : Une implémentation REST Jakarta utilisant le traitement au moment de la construction et Vert.x. Cette extension n'est pas compatible avec l'extension quarkus-resteasy, ni avec aucune des extensions qui en dépendent.
+- Pilote JDBC - PostgreSQL ([guide](https://quarkus.io/guides/datasource)) : Connectez-vous à la base de données PostgreSQL via JDBC
 
-## Provided Code
+## Code Fourni
 
-### RESTEasy Reactive
+### RESTEasy Réactif
 
-Easily start your Reactive RESTful Web Services
+Commencez facilement vos services Web RESTful réactifs
 
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+[Section du guide associée...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
