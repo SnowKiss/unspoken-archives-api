@@ -2,7 +2,6 @@ package com.skaldia.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -17,15 +16,18 @@ public class Npc {
     private String fileId;
     private String firstName;
     private String lastName;
-    private LocalDate birthDate;
+    private String birthDate;
     private Integer age;
     private String occupation;
+    @Column(columnDefinition = "TEXT")
     private String background;
+    @Column(columnDefinition = "TEXT")
     private String physicalDescription;
+    @Column(columnDefinition = "TEXT")
     private String psychologicalDescription;
-
-    @Lob  // Annotation pour gérer les grands objets
-    private byte[] portrait;
+    // L'url du portrait est stockée
+    @Column(columnDefinition = "TEXT")
+    private String portrait;
 
     @ElementCollection
     private List<String> adjectives;
@@ -76,11 +78,9 @@ public class Npc {
         this.lastName = lastName;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
+    public String getBirthDate() {return birthDate;}
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -124,11 +124,11 @@ public class Npc {
         this.psychologicalDescription = psychologicalDescription;
     }
 
-    public byte[] getPortrait() {
+    public String getPortrait() {
         return portrait;
     }
 
-    public void setPortrait(byte[] portrait) {
+    public void setPortrait(String portrait) {
         this.portrait = portrait;
     }
 
