@@ -29,14 +29,14 @@ public class Npc {
     @Column(columnDefinition = "TEXT")
     private String portrait;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> adjectives;
 
     @ManyToOne
     @JoinColumn(name = "scenario_id")
     private Scenario scenario;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "npc_relationships",
             joinColumns = @JoinColumn(name = "npc_id"),
@@ -154,5 +154,25 @@ public class Npc {
 
     public void setRelatedNpcs(Set<Npc> relatedNpcs) {
         this.relatedNpcs = relatedNpcs;
+    }
+
+    @Override
+    public String toString() {
+        return "Npc{" +
+                "id=" + id +
+                ", fileId='" + fileId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", age=" + age +
+                ", occupation='" + occupation + '\'' +
+                ", background='" + background + '\'' +
+                ", physicalDescription='" + physicalDescription + '\'' +
+                ", psychologicalDescription='" + psychologicalDescription + '\'' +
+                ", portrait='" + portrait + '\'' +
+                ", adjectives=" + adjectives +
+                ", scenario=" + scenario +
+                ", relatedNpcs=" + relatedNpcs +
+                '}';
     }
 }

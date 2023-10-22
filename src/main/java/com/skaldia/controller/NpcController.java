@@ -6,6 +6,7 @@ import com.skaldia.service.NpcService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
@@ -29,8 +30,21 @@ public class NpcController {
     }
 
     @POST
-    public void createNpc(NpcDto npcDto) {
-        npcService.createNpc(npcDto);
+    public Response createNpc(NpcDto npcDto) {
+        Npc createdNpc = npcService.createNpc(npcDto);
+        return Response.ok(createdNpc).build();
+    }
+
+    @PUT
+    @Path("/{id}/regenerate-image")
+    public Response regenerateNpcImage(@PathParam("id") Long id) {
+        try {
+            Npc updatedNpc = npcService.regenerateNpcImage(id);
+            System.out.println(updatedNpc.toString());
+            return Response.ok(updatedNpc).build();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
     }
 }
 

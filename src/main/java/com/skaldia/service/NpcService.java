@@ -12,6 +12,7 @@ import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.NotFoundException;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class NpcService {
     }
 
     @Transactional
-    public void createNpc(NpcDto npcDto) {
+    public Npc createNpc(NpcDto npcDto) {
         // TODO faire la gestion du scénario
         Scenario scenario = new Scenario();
         scenario.setLocation("Boston");
@@ -175,6 +176,33 @@ public class NpcService {
         System.out.println("0");
         npcRepository.persist(npc);
 
+        return npc;
+
+    }
+
+    @Transactional
+    public Npc regenerateNpcImage(Long id) {
+        Npc npc = npcRepository.findById(id);
+        if (npc == null) {
+            throw new NotFoundException("NPC not found with id " + id);
+        }
+
+        npc.setPortrait("");
+        while(npc.getPortrait().isBlank()) {
+            String responseStringImg = openAIClient.generatePortrait("Damaged black and white photo portrait, realistic : "+npc.getPhysicalDescription());
+            JsonReader jsonReaderImg = Json.createReader(new StringReader(responseStringImg));
+            JsonObject responseJsonImg = jsonReaderImg.readObject();
+            System.out.println(responseJsonImg);
+
+            JsonArray dataArray = responseJsonImg.getJsonArray("data");
+            if (dataArray != null && !dataArray.isEmpty()) {
+                String imgUrl = dataArray.getJsonObject(0).getString("url");
+                npc.setPortrait(imgUrl);
+            }
+        }
+        npcRepository.persist(npc);
+        System.out.println(npc.getPortrait());
+        return npc;
     }
 }
 
